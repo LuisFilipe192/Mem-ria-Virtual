@@ -135,4 +135,30 @@ TLB Hit Rate = 0.000
 0
 Number of Translated Addresses = 1000
 Page Faults = 538
-Page Fault Rate = 0.538
+Page Fault Rate = 0.538
+TLB Hits = 0
+TLB Hit Rate = 0.000
+[?2004h]0;luisf@aluisio: /mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[01;32mluisf@aluisio[00m:[01;34m/mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[00m$ [7mgit add vm.c evidencias.log[27m
+[7mgit commit -m "feat: reduz a memória para 128 frames com substituição FIFO"[27m[Agit add vm.c evidencias.log
+git commit -m "feat: reduz a memória para 128 frames com substituição FIFO"
+[?2004l[main 2bc2a6c] feat: reduz a memória para 128 frames com substituição FIFO
+ 2 files changed, 45 insertions(+), 5 deletions(-)
+[?2004h]0;luisf@aluisio: /mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[01;32mluisf@aluisio[00m:[01;34m/mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[00m$ [7mmake[27m
+[7m./vm addresses.txt lru fifo; echo $?[27m
+[7mtail -5 correct.txt[27m
+[7m./vm addresses.txt fifo fifo; echo $?[27m
+[7mgrep "Page Faults" correct.txt[27m[A[A[A[A]0;luisf@aluisio: /mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[01;32mluisf@aluisio[00m:[01;34m/mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[00m$ make
+./vm addresses.txt lru fifo; echo $?
+tail -5 correct.txt
+./vm addresses.txt fifo fifo; echo $?
+grep "Page Faults" correct.txt
+[?2004lgcc -Wall -Wextra -std=c99 -O2 -o vm vm.c -pthread
+0
+Number of Translated Addresses = 1000
+Page Faults = 539
+Page Fault Rate = 0.539
+TLB Hits = 0
+TLB Hit Rate = 0.000
+0
+[01;31m[KPage Faults[m[K = 538
+[?2004h]0;luisf@aluisio: /mnt/c/Users/luisf/Downloads/VM/Mem-ria

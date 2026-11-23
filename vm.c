@@ -175,6 +175,8 @@ static int page_table[NUM_PAGES];
 static int frame_page[NUM_FRAMES];
 static int next_frame = 0;
 static int fifo_next = 0;
+static int frame_last_used[NUM_FRAMES];
+static int time_counter = 0;
 static int page_faults = 0;
 static int tlb_hits = 0;
 
@@ -196,8 +198,18 @@ static void load_page(int page, int frame){
 }
 
 static int select_victim(void){
-    int victim = fifo_next;
-    fifo_next = (fifo_next + 1) % NUM_FRAMES;
+    if(page_alg == ALG_FIFO){
+        int victim = fifo_next;
+        fifo_next = (fifo_next + 1) % NUM_FRAMES;
+        return victim;
+    }
+
+    int victim = 0;
+    for(int i = 1; i < NUM_FRAMES; i++){
+        if(frame_last_used[i] < frame_last_used[victim]){
+            victim = i;
+        }
+    }
     return victim;
 }
 
@@ -237,6 +249,8 @@ static void run(void){
         int tlb_index = -1;
 
         int frame = get_frame(page);
+        time_counter++;
+        frame_last_used[frame] = time_counter;
         int physical_address = frame * FRAME_SIZE + offset;
         int value = memory[frame][offset];
 
