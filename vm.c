@@ -202,6 +202,12 @@ static int tlb_frame[TLB_SIZE];
 static int tlb_last_used[TLB_SIZE];
 static int tlb_fifo_next = 0;
 
+typedef struct{
+    int index;
+    int page;
+    int found;
+} tlb_search_arg;
+
 static void init_tlb(void){
     for(int i = 0; i < TLB_SIZE; i++){
         tlb_page[i] = -1;
@@ -209,9 +215,35 @@ static void init_tlb(void){
     }
 }
 
+static void *tlb_search_entry(void *arg){
+    tlb_search_arg *a = (tlb_search_arg *)arg;
+
+    if(tlb_page[a->index] == a->page){
+        a->found = 1;
+    }
+    return NULL;
+}
+
 static int tlb_lookup(int page){
+    pthread_t threads[TLB_SIZE];
+    tlb_search_arg args[TLB_SIZE];
+
     for(int i = 0; i < TLB_SIZE; i++){
-        if(tlb_page[i] == page){
+        args[i].index = i;
+        args[i].page = page;
+        args[i].found = 0;
+
+        if(pthread_create(&threads[i], NULL, tlb_search_entry, &args[i]) != 0){
+            die("could not create tlb search thread");
+        }
+    }
+
+    for(int i = 0; i < TLB_SIZE; i++){
+        pthread_join(threads[i], NULL);
+    }
+
+    for(int i = 0; i < TLB_SIZE; i++){
+        if(args[i].found){
             return i;
         }
     }
