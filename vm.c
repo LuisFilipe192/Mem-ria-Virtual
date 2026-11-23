@@ -55,7 +55,7 @@ static void parse_args(int argc, char *argv[]){
 static void strip_newline(char *s){
     size_t len = strlen(s);
 
-    while(len > 0 && (s[len - 1] == '\n' || s[len - 1] == '\r')){
+    while(len > 0 && isspace((unsigned char)s[len - 1])){
         s[--len] = '\0';
     }
 }
@@ -70,6 +70,10 @@ static int is_blank(const char *s){
 }
 
 static int parse_address(const char *s, int *out){
+    while(isspace((unsigned char)*s)){
+        s++;
+    }
+
     if(*s == '\0'){
         return 0;
     }
