@@ -161,4 +161,68 @@ TLB Hits = 0
 TLB Hit Rate = 0.000
 0
 [01;31m[KPage Faults[m[K = 538
-[?2004h]0;luisf@aluisio: /mnt/c/Users/luisf/Downloads/VM/Mem-ria
+[?2004h]0;luisf@aluisio: /mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[01;32mluisf@aluisio[00m:[01;34m/mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[00m$ [7mgit add vm.c evidencias.log[27m
+[7mgit commit -m "feat: implementa a substituição de página LRU"[27m[A]0;luisf@aluisio: /mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[01;32mluisf@aluisio[00m:[01;34m/mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[00m$ git add vm.c evidencias.log
+git commit -m "feat: implementa a substituição de página LRU"
+[?2004l[main 38f25c4] feat: implementa a substituição de página LRU
+ 2 files changed, 46 insertions(+), 3 deletions(-)
+[?2004h]0;luisf@aluisio: /mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[01;32mluisf@aluisio[00m:[01;34m/mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[00m$ [7mmake[27m
+[7m./vm addresses.txt lru fifo; echo $?[27m
+[7mtail -5 correct.txt[27m
+[7mdiff correct.txt esperado.txt | head -6[27m
+[7mdiff correct.txt esperado.txt | grep -c '^<'[27m[A[A[A[A]0;luisf@aluisio: /mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[01;32mluisf@aluisio[00m:[01;34m/mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[00m$ make
+./vm addresses.txt lru fifo; echo $?
+tail -5 correct.txt
+diff correct.txt esperado.txt | head -6
+diff correct.txt esperado.txt | grep -c '^<'
+[?2004lgcc -Wall -Wextra -std=c99 -O2 -o vm vm.c -pthread
+0
+Number of Translated Addresses = 1000
+Page Faults = 537
+Page Fault Rate = 0.537
+TLB Hits = 54
+TLB Hit Rate = 0.054
+diff: esperado.txt: No such file or directory
+diff: esperado.txt: No such file or directory
+0
+[?2004h]0;luisf@aluisio: /mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[01;32mluisf@aluisio[00m:[01;34m/mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[00m$ [7mmake[27m
+[7m./vm addresses.txt lru fifo; echo $?[27m
+[7mtail -5 correct.txt[27m
+[7mdiff correct.txt esperado.txt | head -6[27m
+[7mdiff correct.txt esperado.txt | grep -c '^<'[27m[A[A[A[A]0;luisf@aluisio: /mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[01;32mluisf@aluisio[00m:[01;34m/mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[00m$ make
+./vm addresses.txt lru fifo; echo $?
+tail -5 correct.txt
+diff correct.txt esperado.txt | head -6
+diff correct.txt esperado.txt | grep -c '^<'
+[?2004lmake: Nothing to be done for 'all'.
+0
+Number of Translated Addresses = 1000
+Page Faults = 537
+Page Fault Rate = 0.537
+TLB Hits = 54
+TLB Hit Rate = 0.054
+279,280c279,280
+< Virtual address: 1562 TLB: 6 Physical address: 4890 Value: 1
+< Virtual address: 7580 TLB: 7 Physical address: 21148 Value: 0
+---
+> Virtual address: 1562 TLB: 6 Physical address: 21018 Value: 1
+> Virtual address: 7580 TLB: 7 Physical address: 11932 Value: 0
+344
+[?2004h]0;luisf@aluisio: /mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[01;32mluisf@aluisio[00m:[01;34m/mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[00m$ [K]0;luisf@aluisio: /mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[01;32mluisf@aluisio[00m:[01;34m/mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[00m$ [K]0;luisf@aluisio: /mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[01;32mluisf@aluisio[00m:[01;34m/mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[00m$ [7mmake[27m
+[7m./vm addresses.txt lru fifo; echo $?[27m
+[7mtail -5 correct.txt[27m
+[7mdiff correct.txt esperado.txt && echo "IGUAL AO DO PROFESSOR"[27m[A[A[A]0;luisf@aluisio: /mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[01;32mluisf@aluisio[00m:[01;34m/mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[00m$ make
+./vm addresses.txt lru fifo; echo $?
+tail -5 correct.txt
+diff correct.txt esperado.txt && echo "IGUAL AO DO PROFESSOR"
+[?2004lgcc -Wall -Wextra -std=c99 -O2 -o vm vm.c -pthread
+0
+Number of Translated Addresses = 1000
+Page Faults = 539
+Page Fault Rate = 0.539
+TLB Hits = 54
+TLB Hit Rate = 0.054
+IGUAL AO DO PROFESSOR
+[?2004h]0;luisf@aluisio: /mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[01;32mluisf@aluisio[00m:[01;34m/mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[00m$ [K]0;luisf@aluisio: /mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[01;32mluisf@aluisio[00m:[01;34m/mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[00m$ [K]0;luisf@aluisio: /mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[01;32mluisf@aluisio[00m:[01;34m/mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[00m$ [K]0;luisf@aluisio: /mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[01;32mluisf@aluisio[00m:[01;34m/mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[00m$ [7mfor p in fifo lru; do for t in fifo [27m[7ml[27m[7mru; do ./vm addresses.txt $p $t; echo "$p $t: $(grep -E 'Page Faults|TLB Hits' correct.txt | tr '\[27m[7mn[27m[7m' ' ')"; done; done[27m[A[A]0;luisf@aluisio: /mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[01;32mluisf@aluisio[00m:[01;34m/mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[00m$ for p in fifo lru; do for t in fifo lru; do ./vm addresses.txt $p $t; echo "$p $t: $(grep -E 'Page Faults|TLB Hits' correct.txt | tr '\n' ' ')"; done; done
+[?2004lfifo fifo: Page Faults = 538 TLB Hits = 54 
+fifo lru: Page Faults = 538 TLB Hits = 5

@@ -197,6 +197,67 @@ static void load_page(int page, int frame){
     }
 }
 
+static int tlb_page[TLB_SIZE];
+static int tlb_frame[TLB_SIZE];
+static int tlb_last_used[TLB_SIZE];
+static int tlb_fifo_next = 0;
+
+static void init_tlb(void){
+    for(int i = 0; i < TLB_SIZE; i++){
+        tlb_page[i] = -1;
+        tlb_frame[i] = -1;
+    }
+}
+
+static int tlb_lookup(int page){
+    for(int i = 0; i < TLB_SIZE; i++){
+        if(tlb_page[i] == page){
+            return i;
+        }
+    }
+    return -1;
+}
+
+static int tlb_insert(int page, int frame){
+    int index;
+
+    if(tlb_alg == ALG_FIFO){
+        index = tlb_fifo_next;
+        tlb_fifo_next = (tlb_fifo_next + 1) % TLB_SIZE;
+    }
+    else{
+        index = -1;
+        for(int i = 0; i < TLB_SIZE; i++){
+            if(tlb_page[i] == -1){
+                index = i;
+                break;
+            }
+        }
+        if(index == -1){
+            index = 0;
+            for(int i = 1; i < TLB_SIZE; i++){
+                if(tlb_last_used[i] < tlb_last_used[index]){
+                    index = i;
+                }
+            }
+        }
+    }
+
+    tlb_page[index] = page;
+    tlb_frame[index] = frame;
+    tlb_last_used[index] = time_counter;
+    return index;
+}
+
+static void tlb_invalidate(int page){
+    for(int i = 0; i < TLB_SIZE; i++){
+        if(tlb_page[i] == page){
+            tlb_page[i] = -1;
+            tlb_frame[i] = -1;
+        }
+    }
+}
+
 static int select_victim(void){
     if(page_alg == ALG_FIFO){
         int victim = fifo_next;
@@ -227,6 +288,7 @@ static int get_frame(int page){
     }
     else{
         frame = select_victim();
+        tlb_invalidate(frame_page[frame]);
         page_table[frame_page[frame]] = -1;
     }
 
@@ -246,11 +308,22 @@ static void run(void){
         int virtual_address = addresses[i];
         int page = (virtual_address >> 8) & 0xFF;
         int offset = virtual_address & 0xFF;
-        int tlb_index = -1;
-
-        int frame = get_frame(page);
         time_counter++;
+
+        int frame;
+        int tlb_index = tlb_lookup(page);
+
+        if(tlb_index != -1){
+            tlb_hits++;
+            frame = tlb_frame[tlb_index];
+            tlb_last_used[tlb_index] = time_counter;
+        }
+        else{
+            frame = get_frame(page);
+            tlb_index = tlb_insert(page, frame);
+        }
         frame_last_used[frame] = time_counter;
+
         int physical_address = frame * FRAME_SIZE + offset;
         int value = memory[frame][offset];
 
@@ -271,6 +344,7 @@ int main(int argc, char *argv[]){
     load_addresses(argv[1]);
     open_backing_store();
     init_page_table();
+    init_tlb();
     run();
     fclose(backing);
     free(addresses);
