@@ -96,7 +96,7 @@ São tratados os seguintes casos:
 - Arquivo de endereços sem nenhum endereço.
 - Arquivo `BACKING_STORE.bin` inexistente ou com tamanho diferente de 65536 bytes.
 
-Linhas em branco são ignoradas, e quebras de linha no padrão do Windows (`\r\n`) são aceitas.
+Linhas em branco e espaços no início ou no fim de cada linha são ignorados, e quebras de linha no padrão do Windows (\r\n) são aceitas.
 
 ## Testes realizados
 
