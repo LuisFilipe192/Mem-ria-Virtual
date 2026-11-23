@@ -170,15 +170,20 @@ static void open_backing_store(void){
     rewind(backing);
 }
 
-static signed char memory[NUM_PAGES][FRAME_SIZE];
+static signed char memory[NUM_FRAMES][FRAME_SIZE];
 static int page_table[NUM_PAGES];
+static int frame_page[NUM_FRAMES];
 static int next_frame = 0;
+static int fifo_next = 0;
 static int page_faults = 0;
 static int tlb_hits = 0;
 
 static void init_page_table(void){
-    for(int i = 0; i < NUM_PAGES; i++){
+    for(int i=0;i < NUM_PAGES;i++){
         page_table[i] = -1;
+    }
+    for(int i=0;i<NUM_FRAMES;i++){
+        frame_page[i] = -1;
     }
 }
 
@@ -190,17 +195,32 @@ static void load_page(int page, int frame){
     }
 }
 
+static int select_victim(void){
+    int victim = fifo_next;
+    fifo_next = (fifo_next + 1) % NUM_FRAMES;
+    return victim;
+}
+
 static int get_frame(int page){
     if(page_table[page] != -1){
         return page_table[page];
     }
 
     page_faults++;
-    int frame = next_frame;
-    next_frame++;
+    int frame;
+
+    if(next_frame < NUM_FRAMES){
+        frame = next_frame;
+        next_frame++;
+    }
+    else{
+        frame = select_victim();
+        page_table[frame_page[frame]] = -1;
+    }
 
     load_page(page, frame);
     page_table[page] = frame;
+    frame_page[frame] = page;
     return frame;
 }
 
