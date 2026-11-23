@@ -321,4 +321,9 @@ Quebra de linha do Windows         código 0 (esperado 0) PASSOU
 RESULTADO: 16 passaram, 0 falharam
 [?2004h]0;luisf@aluisio: /mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[01;32mluisf@aluisio[00m:[01;34m/mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[00m$ [7mgit add README.md evidencias.log[27m
 [7mgit commit -m "docs: adiciona README"[27m[A]0;luisf@aluisio: /mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[01;32mluisf@aluisio[00m:[01;34m/mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[00m$ git add README.md evidencias.log
-git commit -
+git commit -m "docs: adiciona README"
+[?2004l[main 101d07d] docs: adiciona README
+ 2 files changed, 204 insertions(+), 2 deletions(-)
+[?2004h]0;luisf@aluisio: /mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[01;32mluisf@aluisio[00m:[01;34m/mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[00m$ [7mgit add evidencias.log[27m
+[7mgit commit -m "docs: atualiza evidencias.log"[27m
+[7mgit push[27m[A[A]0;luisf@aluisio: /mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[01;32mluisf@aluisio[00m:[01;34m/mnt
