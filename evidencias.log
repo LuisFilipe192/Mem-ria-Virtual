@@ -71,4 +71,54 @@ Error: address file has no addresses
 [?2004l-rwxrwxrwx 1 luisf luisf 65536 Nov 23 13:26 [0m[01;32mBACKING_STORE.bin[0m
 -rwxrwxrwx 1 luisf luisf  5830 Nov 23 13:55 [01;32maddresses.txt[0m
 [?2004h]0;luisf@aluisio: /mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[01;32mluisf@aluisio[00m:[01;34m/mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[00m$ [7m./vm addresses.txt lru fifo; echo $?[27m 
-[7mgit add vm.c e
+[7mgit add vm.c evidencias.log[27m
+[7mgit commit -m "feat: lê e valida o arquivo de endereços e o BACKING_STORE"[27m[A[A[A./vm addresses.txt lru fifo; echo $? 
+git add vm.c evidencias.log
+git commit -m "feat: lê e valida o arquivo de endereços e o BACKING_STORE"
+[?2004l0
+[main 2304785] feat: lê e valida o arquivo de endereços e o BACKING_STORE
+ 2 files changed, 166 insertions(+), 3 deletions(-)
+[?2004h]0;luisf@aluisio: /mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[01;32mluisf@aluisio[00m:[01;34m/mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[00m$ [7mmake[27m
+[7m./vm addresses.txt lru fifo; echo $?[27m
+[7mhead -3 correct.txt[27m
+[7mtail -5 correct.txt[27m[A[A[A]0;luisf@aluisio: /mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[01;32mluisf@aluisio[00m:[01;34m/mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[00m$ make
+./vm addresses.txt lru fifo; echo $?
+head -3 correct.txt
+tail -5 correct.txt
+[?2004lgcc -Wall -Wextra -std=c99 -O2 -o vm vm.c -pthread
+[01m[Kvm.c:185:13:[m[K [01;31m[Kerror: [m[Kredefinition of ‘[01m[Kinit_page_table[m[K’
+  185 | static void [01;31m[Kinit_page_table[m[K(void){
+      |             [01;31m[K^~~~~~~~~~~~~~~[m[K
+[01m[Kvm.c:179:13:[m[K [01;36m[Knote: [m[Kprevious definition of ‘[01m[Kinit_page_table[m[K’ with type ‘[01m[Kvoid(void)[m[K’
+  179 | static void [01;36m[Kinit_page_table[m[K(void){
+      |             [01;36m[K^~~~~~~~~~~~~~~[m[K
+[01m[Kvm.c:[m[K In function ‘[01m[Kget_frame[m[K’:
+[01m[Kvm.c:200:5:[m[K [01;35m[Kwarning: [m[Kimplicit declaration of function ‘[01m[Kload_page[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wimplicit-function-declaration-Wimplicit-function-declaration]8;;[m[K]
+  200 |     [01;35m[Kload_page[m[K(page, frame);
+      |     [01;35m[K^~~~~~~~~[m[K
+[01m[Kvm.c:[m[K At top level:
+[01m[Kvm.c:179:13:[m[K [01;35m[Kwarning: [m[K‘[01m[Kinit_page_table[m[K’ defined but not used [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-function-Wunused-function]8;;[m[K]
+  179 | static void [01;35m[Kinit_page_table[m[K(void){
+      |             [01;35m[K^~~~~~~~~~~~~~~[m[K
+make: *** [Makefile:8: vm] Error 1
+0
+head: cannot open 'correct.txt' for reading: No such file or directory
+tail: cannot open 'correct.txt' for reading: No such file or directory
+[?2004h]0;luisf@aluisio: /mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[01;32mluisf@aluisio[00m:[01;34m/mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[00m$ [7mmake[27m
+[7m./vm addresses.txt lru fifo; echo $?[27m
+[7mhead -3 correct.txt[27m
+[7mtail -5 correct.txt[27m[A[A[A]0;luisf@aluisio: /mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[01;32mluisf@aluisio[00m:[01;34m/mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[00m$ make
+./vm addresses.txt lru fifo; echo $?
+head -3 correct.txt
+tail -5 correct.txt
+[?2004lgcc -Wall -Wextra -std=c99 -O2 -o vm vm.c -pthread
+0
+Virtual address: 16916 TLB: -1 Physical address: 20 Value: 0
+Virtual address: 62493 TLB: -1 Physical address: 285 Value: 0
+Virtual address: 30198 TLB: -1 Physical address: 758 Value: 29
+Number of Translated Addresses = 1000
+Page Faults = 244
+Page Fault Rate = 0.244
+TLB Hits = 0
+TLB Hit Rate = 0.000
+[?2004h]0;luisf@aluisio: /mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[01;32mluisf@aluisio[00m:[01;34m/mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[00m$ [

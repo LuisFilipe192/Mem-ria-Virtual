@@ -170,10 +170,74 @@ static void open_backing_store(void){
     rewind(backing);
 }
 
+static signed char memory[NUM_PAGES][FRAME_SIZE];
+static int page_table[NUM_PAGES];
+static int next_frame = 0;
+static int page_faults = 0;
+static int tlb_hits = 0;
+
+static void init_page_table(void){
+    for(int i = 0; i < NUM_PAGES; i++){
+        page_table[i] = -1;
+    }
+}
+
+static void load_page(int page, int frame){
+    fseek(backing, (long)page * PAGE_SIZE, SEEK_SET);
+
+    if(fread(memory[frame], 1, PAGE_SIZE, backing) != PAGE_SIZE){
+        die("could not read page from " BACKING_STORE);
+    }
+}
+
+static int get_frame(int page){
+    if(page_table[page] != -1){
+        return page_table[page];
+    }
+
+    page_faults++;
+    int frame = next_frame;
+    next_frame++;
+
+    load_page(page, frame);
+    page_table[page] = frame;
+    return frame;
+}
+
+static void run(void){
+    FILE *out = fopen(OUTPUT_FILE, "w");
+    if(out == NULL){
+        die("could not create " OUTPUT_FILE);
+    }
+
+    for(int i=0;i<n_addresses;i++){
+        int virtual_address = addresses[i];
+        int page = (virtual_address >> 8) & 0xFF;
+        int offset = virtual_address & 0xFF;
+        int tlb_index = -1;
+
+        int frame = get_frame(page);
+        int physical_address = frame * FRAME_SIZE + offset;
+        int value = memory[frame][offset];
+
+        fprintf(out, "Virtual address: %d TLB: %d Physical address: %d Value: %d\n",
+            virtual_address, tlb_index, physical_address, value);
+    }
+
+    fprintf(out, "Number of Translated Addresses = %d\n", n_addresses);
+    fprintf(out, "Page Faults = %d\n", page_faults);
+    fprintf(out, "Page Fault Rate = %.3f\n", (double)page_faults / n_addresses);
+    fprintf(out, "TLB Hits = %d\n", tlb_hits);
+    fprintf(out, "TLB Hit Rate = %.3f\n", (double)tlb_hits / n_addresses);
+    fclose(out);
+}
+
 int main(int argc, char *argv[]){
     parse_args(argc, argv);
     load_addresses(argv[1]);
     open_backing_store();
+    init_page_table();
+    run();
     fclose(backing);
     free(addresses);
     return 0;
