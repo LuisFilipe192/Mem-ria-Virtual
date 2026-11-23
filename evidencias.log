@@ -1,0 +1,35 @@
+Script started on 2026-11-23 13:39:37-03:00 [TERM="xterm-256color" TTY="/dev/pts/0" COLUMNS="99" LINES="17"]
+[?2004h]0;luisf@aluisio: /mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[01;32mluisf@aluisio[00m:[01;34m/mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[00m$ [K]0;luisf@aluisio: /mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[01;32mluisf@aluisio[00m:[01;34m/mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[00m$ [K]0;luisf@aluisio: /mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[01;32mluisf@aluisio[00m:[01;34m/mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[00m$ cd .
+[?2004l[?2004h]0;luisf@aluisio: /mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[01;32mluisf@aluisio[00m:[01;34m/mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[00m$ exit
+[?2004lexit
+
+Script done on 2026-11-23 13:43:47-03:00 [COMMAND_EXIT_CODE="0"]
+Script started on 2026-11-23 13:50:24-03:00 [TERM="xterm-256color" TTY="/dev/pts/0" COLUMNS="99" LINES="16"]
+[?2004h]0;luisf@aluisio: /mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[01;32mluisf@aluisio[00m:[01;34m/mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[00m$ [7mmake[27m
+[7m./vm; echo $?[27m
+[7m./vm addresses.txt lru; echo $?[27m
+[7m./vm addresses.txt lru fifo extra; echo $?[27m
+[7m./vm addresses.txt optimal fifo; echo $?[27m
+[7m./vm addresses.txt lru LRU; echo $?[27m
+[7m./vm addresses.txt lru fifo; echo $?[27m[A[A[A[A[A[A]0;luisf@aluisio: /mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[01;32mluisf@aluisio[00m:[01;34m/mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[00m$ make
+./vm; echo $?
+./vm addresses.txt lru; echo $?
+./vm addresses.txt lru fifo extra; echo $?
+./vm addresses.txt optimal fifo; echo $?
+./vm addresses.txt lru LRU; echo $?
+./vm addresses.txt lru fifo; echo $?
+[?2004lmake: Nothing to be done for 'all'.
+Error: usage: ./vm <address file> <page replacement: fifo|lru> <tlb replacement: fifo|lru>
+1
+Error: usage: ./vm <address file> <page replacement: fifo|lru> <tlb replacement: fifo|lru>
+1
+Error: usage: ./vm <address file> <page replacement: fifo|lru> <tlb replacement: fifo|lru>
+1
+Error: page replacement algorithm must be fifo or lru
+1
+Error: tlb replacement algorithm must be fifo or lru
+1
+0
+[?2004h]0;luisf@aluisio: /mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[01;32mluisf@aluisio[00m:[01;34m/mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[00m$ [7mgit add vm.c[27m
+[7mgit commit -m "feat: valida os argumentos e os algoritmos de substituição"[27m[A./vm addresses.txt lru fifo; echo $? [K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[24Pgit add vm.c
+git commit -m "feat: valida os argumentos e os algoritmos de substituição"[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K[K[K[K
