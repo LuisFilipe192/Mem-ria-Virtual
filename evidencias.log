@@ -248,4 +248,77 @@ fifo lru: Page Faults = 538 TLB Hits = 55
 lru fifo: Page Faults = 539 TLB Hits = 54 
 lru lru: Page Faults = 539 TLB Hits = 55 
 [?2004h]0;luisf@aluisio: /mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[01;32mluisf@aluisio[00m:[01;34m/mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[00m$ [7mgit add vm.c evidencias.log[27m
-[7mgit commit -m "feat: faz a busc
+[7mgit commit -m "feat: faz a busca na TLB com uma thread por entrada"[27m[Agit add vm.c evidencias.log
+git commit -m "feat: faz a busca na TLB com uma thread por entrada"
+[?2004l[main 5edb978] feat: faz a busca na TLB com uma thread por entrada
+ 2 files changed, 57 insertions(+), 2 deletions(-)
+[?2004h]0;luisf@aluisio: /mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[01;32mluisf@aluisio[00m:[01;34m/mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[00m$ make
+B="$(pwd)/vm"; A="$(pwd)/addresses.txt"; S="$(pwd)/BACKING_STORE.bin"; P=0; F=0
+t(){ d=$(mktemp -d); [ "$3" = BS ] && cp "$S" $d/; [ -n "$4" ] && printf "$4" > $d/teste.txt; n="$1[7m"[27m[7m; e=$2; shift 4; o=$(cd $d && "$B" "$@" 2>&1); r=$?; if [ $r -eq $e ]; then P=$((P+1)); s=PASSOU; [27m[7me[27m[7mlse F=$((F+1)); s=FALHOU; fi; printf '%-34s código %s (esperado %s) %s\n   %s\n' "$n" $r $e $s "${[27m[7mo[27m[7m:-(sem saída)}"; rm -rf $d; } [27m
+[7mt "Sem argumentos"                 1 BS ""[27m
+[7mt "Argumentos a menos"             1 BS "" "$A" lru[27m
+[7mt "Argumentos a mais"              1 BS "" "$A" lru fifo extra[27m
+[7mt "Algoritmo de página inválido"   1 BS "" "$A" optimal fifo[27m
+[7mt "Algoritmo da TLB inválido"      1 BS "" "$A" lru clock[27m
+[7mt "Algoritmo em maiúsculas"        1 BS "" "$A" LRU fifo[27m
+[7mt "Arquivo de endereços inexistente" 1 BS "" naoexiste.txt lru fifo[27m
+[7mt "Letra no arquivo"               1 BS '100\n2a3\n' teste.txt lru fifo[27m
+[7mt "Endereço maior que 65535"       1 BS '100\n70000\n' teste.txt lru fifo[27m
+[7mt "Endereço negativo"              1 BS '100\n-5\n' teste.txt lru fifo[27m
+[7mt "Dois endereços na mesma linha"  1 BS '100 200\n' teste.txt lru fifo[27m
+[7mt "Arquivo só com linhas vazias"   1 BS '\n\n' teste.txt lru fifo[27m
+[7mt "BACKING_STORE.bin ausente"      1 NO "" "$A" lru fifo[27m
+[7mt "Arquivo válido"                 0 BS "" "$A" lru fifo[27m
+[7mt "Linhas em branco no meio"       0 BS '100\n\n200\n' teste.txt lru fifo[27m[7mt "Quebra de linha do Windows"     0 BS '100\r\n200\r\n' teste.txt lru fifo[27m[7mecho "RESULTADO: $P passaram, $F falharam"[27m[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A"; e=$2; shift 4; o=$(cd $d && "$B" "$@" 2>&1); r=$?; if [ $r -eq $e ]; then P=$((P+1)); s=PASSOU; else F=$((F+1)); s=FALHOU; fi; printf '%-34s código %s (esperado %s) %s\n   %s\n' "$n" $r $e $s "${o:-(sem saída)}"; rm -rf $d; }
+t "Sem argumentos"                 1 BS ""
+t "Argumentos a menos"             1 BS "" "$A" lru
+t "Argumentos a mais"              1 BS "" "$A" lru fifo extra
+t "Algoritmo de página inválido"   1 BS "" "$A" optimal fifo
+t "Algoritmo da TLB inválido"      1 BS "" "$A" lru clock
+t "Algoritmo em maiúsculas"        1 BS "" "$A" LRU fifo
+t "Arquivo de endereços inexistente" 1 BS "" naoexiste.txt lru fifo
+t "Letra no arquivo"               1 BS '100\n2a3\n' teste.txt lru fifo
+t "Endereço maior que 65535"       1 BS '100\n70000\n' teste.txt lru fifo
+t "Endereço negativo"              1 BS '100\n-5\n' teste.txt lru fifo
+t "Dois endereços na mesma linha"  1 BS '100 200\n' teste.txt lru fifo
+t "Arquivo só com linhas vazias"   1 BS '\n\n' teste.txt lru fifo
+t "BACKING_STORE.bin ausente"      1 NO "" "$A" lru fifo
+t "Arquivo válido"                 0 BS "" "$A" lru fifo
+t "Linhas em branco no meio"       0 BS '100\n\n200\n' teste.txt lru fifot "Quebra de linha do Windows"     0 BS '100\r\n200\r\n' teste.txt lru fifoecho "RESULTADO: $P passaram, $F falharam"
+[?2004lmake: Nothing to be done for 'all'.
+Sem argumentos                     código 1 (esperado 1) PASSOU
+   Error: usage: ./vm <address file> <page replacement: fifo|lru> <tlb replacement: fifo|lru>
+Argumentos a menos                 código 1 (esperado 1) PASSOU
+   Error: usage: ./vm <address file> <page replacement: fifo|lru> <tlb replacement: fifo|lru>
+Argumentos a mais                  código 1 (esperado 1) PASSOU
+   Error: usage: ./vm <address file> <page replacement: fifo|lru> <tlb replacement: fifo|lru>
+Algoritmo de página inválido     código 1 (esperado 1) PASSOU
+   Error: page replacement algorithm must be fifo or lru
+Algoritmo da TLB inválido         código 1 (esperado 1) PASSOU
+   Error: tlb replacement algorithm must be fifo or lru
+Algoritmo em maiúsculas           código 1 (esperado 1) PASSOU
+   Error: page replacement algorithm must be fifo or lru
+Arquivo de endereços inexistente  código 1 (esperado 1) PASSOU
+   Error: could not open address file 'naoexiste.txt'
+Letra no arquivo                   código 1 (esperado 1) PASSOU
+   Error: address file line 2 is invalid (expected one integer between 0 and 65535)
+Endereço maior que 65535          código 1 (esperado 1) PASSOU
+   Error: address file line 2 is invalid (expected one integer between 0 and 65535)
+Endereço negativo                 código 1 (esperado 1) PASSOU
+   Error: address file line 2 is invalid (expected one integer between 0 and 65535)
+Dois endereços na mesma linha     código 1 (esperado 1) PASSOU
+   Error: address file line 1 is invalid (expected one integer between 0 and 65535)
+Arquivo só com linhas vazias      código 1 (esperado 1) PASSOU
+   Error: address file has no addresses
+BACKING_STORE.bin ausente          código 1 (esperado 1) PASSOU
+   Error: could not open BACKING_STORE.bin
+Arquivo válido                    código 0 (esperado 0) PASSOU
+   (sem saída)
+Linhas em branco no meio           código 0 (esperado 0) PASSOU
+   (sem saída)
+Quebra de linha do Windows         código 0 (esperado 0) PASSOU
+   (sem saída)
+RESULTADO: 16 passaram, 0 falharam
+[?2004h]0;luisf@aluisio: /mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[01;32mluisf@aluisio[00m:[01;34m/mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[00m$ [7mgit add README.md evidencias.log[27m
+[7mgit commit -m "docs: adiciona README"[27m[A]0;luisf@aluisio: /mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[01;32mluisf@aluisio[00m:[01;34m/mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[00m$ git add README.md evidencias.log
+git commit -
