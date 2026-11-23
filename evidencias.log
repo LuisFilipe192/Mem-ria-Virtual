@@ -32,4 +32,43 @@ Error: tlb replacement algorithm must be fifo or lru
 0
 [?2004h]0;luisf@aluisio: /mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[01;32mluisf@aluisio[00m:[01;34m/mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[00m$ [7mgit add vm.c[27m
 [7mgit commit -m "feat: valida os argumentos e os algoritmos de substituição"[27m[A./vm addresses.txt lru fifo; echo $? [K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[24Pgit add vm.c
-git commit -m "feat: valida os argumentos e os algoritmos de substituição"[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K[K[K[K
+git commit -m "feat: valida os argumentos e os algoritmos de substituição"[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K[K[K[K[K[K[K[K[K[K[K[K[7mgit add vm.c evidencias.log[27m
+[7mgit commit -m "feat: valida os argumentos e os algoritmos de substituição"[27m[Agit add vm.c evidencias.log
+git commit -m "feat: valida os argumentos e os algoritmos de substituição"
+[?2004l[main d60c5d5] feat: valida os argumentos e os algoritmos de substituição
+ 2 files changed, 73 insertions(+), 2 deletions(-)
+ create mode 100644 evidencias.log
+[?2004h]0;luisf@aluisio: /mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[01;32mluisf@aluisio[00m:[01;34m/mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[00m$ [7mmake[27m
+[7m./vm addresses.txt lru fifo; echo $?[27m
+[7m./vm naoexiste.txt lru fifo; echo $?[27m
+[7mprintf '100\n2a3\n' > teste.txt; ./vm teste.txt lru fifo; echo $?[27m
+[7mprintf '100\n70000\n' > teste.txt; ./vm teste.txt lru fifo; echo $?[27m
+[7mprintf '100 200\n' > teste.txt; ./vm teste.txt lru fifo; echo $?[27m
+[7mprintf '\n\n' > teste.txt; ./vm teste.txt lru fifo; echo $?[27m
+[7mrm teste.txt[27m[A[A[A[A[A[A[A]0;luisf@aluisio: /mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[01;32mluisf@aluisio[00m:[01;34m/mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[00m$ make
+./vm addresses.txt lru fifo; echo $?
+./vm naoexiste.txt lru fifo; echo $?
+printf '100\n2a3\n' > teste.txt; ./vm teste.txt lru fifo; echo $?
+printf '100\n70000\n' > teste.txt; ./vm teste.txt lru fifo; echo $?
+printf '100 200\n' > teste.txt; ./vm teste.txt lru fifo; echo $?
+printf '\n\n' > teste.txt; ./vm teste.txt lru fifo; echo $?
+rm teste.txt
+[?2004lgcc -Wall -Wextra -std=c99 -O2 -o vm vm.c -pthread
+Error: could not open address file 'addresses.txt'
+1
+Error: could not open address file 'naoexiste.txt'
+1
+Error: address file line 2 is invalid (expected one integer between 0 and 65535)
+1
+Error: address file line 2 is invalid (expected one integer between 0 and 65535)
+1
+Error: address file line 1 is invalid (expected one integer between 0 and 65535)
+1
+Error: address file has no addresses
+1
+[?2004h]0;luisf@aluisio: /mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[01;32mluisf@aluisio[00m:[01;34m/mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[00m$ ^C[?2004l[?2004h[?2004l
+[?2004h]0;luisf@aluisio: /mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[01;32mluisf@aluisio[00m:[01;34m/mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[00m$ [7mls -l addresses.txt BACKING_STORE.bi[27m[7mn[27m[A]0;luisf@aluisio: /mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[01;32mluisf@aluisio[00m:[01;34m/mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[00m$ ls -l addresses.txt BACKING_STORE.bin
+[?2004l-rwxrwxrwx 1 luisf luisf 65536 Nov 23 13:26 [0m[01;32mBACKING_STORE.bin[0m
+-rwxrwxrwx 1 luisf luisf  5830 Nov 23 13:55 [01;32maddresses.txt[0m
+[?2004h]0;luisf@aluisio: /mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[01;32mluisf@aluisio[00m:[01;34m/mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[00m$ [7m./vm addresses.txt lru fifo; echo $?[27m 
+[7mgit add vm.c e
