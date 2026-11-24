@@ -2197,4 +2197,20 @@ Error: could not open address file 'address.txt'
 > TLB Hit Rate = 0.054
 Error: address file line 1 is invalid (expected one integer between 0 and 65535)
 1
-[?2004h]0;luisf@aluisio: /mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[01;32mluisf@aluisio[00m:[01;34m/mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[00m$ [K]0;luisf@aluisio: /mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virt
+[?2004h]0;luisf@aluisio: /mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[01;32mluisf@aluisio[00m:[01;34m/mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[00m$ [K]0;luisf@aluisio: /mnt/c/Users/luisf/Downloads/VM/Mem-ria-VirtScript started on 2026-11-24 17:47:53-03:00 [TERM="xterm-256color" TTY="/dev/pts/2" COLUMNS="62" LINES="20"]
+[?2004h]0;luisf@aluisio: /mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[01;32mluisf@aluisio[00m:[01;34m/mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[00m$ [7mmake[27m
+[7mhead -1000 esperado.txt > esperado_linhas.txt[27m
+[7m./vm addresses.txt lru fifo > saida.txt; echo $?[27m
+[7mwc -l saida.txt esperado_linhas.txt[27m
+[7mdiff saida.txt esperado_linhas.txt && echo "IGUAL AO DO PROFES[27m[7mS[27m[7mOR"[27m[A[A[A[A[A[Cmake
+head -1000 esperado.txt > esperado_linhas.txt
+./vm addresses.txt lru fifo > saida.txt; echo $?
+wc -l saida.txt esperado_linhas.txt
+diff saida.txt esperado_linhas.txt && echo "IGUAL AO DO PROFESSOR"
+[?2004lgcc -Wall -Wextra -std=c99 -O2 -o vm vm.c -pthread
+0
+  1000 saida.txt
+  1000 esperado_linhas.txt
+  2000 total
+IGUAL AO DO PROFESSOR
+[?2004h]0;luisf@aluisio: /mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[01;32mluisf@aluisio[00
