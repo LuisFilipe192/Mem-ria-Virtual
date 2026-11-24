@@ -2213,4 +2213,71 @@ Error: address file line 1 is invalid (expected one integer between 0 and 65535)
   1000 esperado_linhas.txt
   2000 total
 IGUAL AO DO PROFESSOR
-[?2004h]0;luisf@aluisio: /mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[01;32mluisf@aluisio[00
+[?2004h]0;luisf@aluisio: /mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[01;32mluisf@aluisio[00m:[01;34m/mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[00m$ [7mgit add vm.c Makefile evidencias.log[27m
+[7mgit commit -m "feat: imprime a saída na saída padrão sem as es[27m[7mt[27m[7matísticas"[27m[A[A[Cgit add vm.c Makefile evidencias.log
+git commit -m "feat: imprime a saída na saída padrão sem as estatísticas"
+[?2004l[main fdfeb90] feat: imprime a saída na saída padrão sem as estatísticas
+ 3 files changed, 399 insertions(+), 400 deletions(-)
+[?2004h]0;luisf@aluisio: /mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[01;32mluisf@aluisio[00m:[01;34m/mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[00m$ [7mmake[27m
+[7m./vm addresses.txt lru fifo > saida.txt[27m
+[7mdiff saida.txt esperado_linhas.txt && echo "IGUAL AO DO PROFES[27m[7mS[27m[7mOR" [27m
+[7mfor p in fifo lru; do for t in fifo lru; do ./vm addresses.txt[27m[7m [27m[7m$p $t | md5sum | cut -c1-8 | sed "s/^/$p $t: /"; done; done[27m[A[A[A[A[A[Cmake
+./vm addresses.txt lru fifo > saida.txt
+diff saida.txt esperado_linhas.txt && echo "IGUAL AO DO PROFESSOR"
+for p in fifo lru; do for t in fifo lru; do ./vm addresses.txt $p $t | md5sum | cut -c1-8 | sed "s/^/$p $t: /"; done; done
+[?2004lmake: Nothing to be done for 'all'.
+IGUAL AO DO PROFESSOR
+fifo fifo: 595915dc
+fifo lru: 056eafe3
+lru fifo: c8f8894f
+lru lru: a5e79e7e
+[?2004h]0;luisf@aluisio: /mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[01;32mluisf@aluisio[00m:[01;34m/mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[00m$ make celan
+[?2004lmake: *** No rule to make target 'celan'.  Stop.
+[?2004h]0;luisf@aluisio: /mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[01;32mluisf@aluisio[00m:[01;34m/mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[00m$ make clean
+[?2004lrm -f vm 
+[?2004h]0;luisf@aluisio: /mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[01;32mluisf@aluisio[00m:[01;34m/mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[00m$ make
+[?2004lgcc -Wall -Wextra -std=c99 -O2 -o vm vm.c -pthread
+[?2004h]0;luisf@aluisio: /mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[01;32mluisf@aluisio[00m:[01;34m/mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[00m$ [7mmake[27m
+[7m./vm addresses.txt lru fifo > saida.txt[27m
+[7mdiff saida.txt esperado_linhas.txt && echo "IGUAL AO DO PROFES[27m[7mS[27m[7mOR" [27m
+[7mfor p in fifo lru; do for t in fifo lru; do ./vm addresses.txt[27m[7m [27m[7m$p $t | md5sum | cut -c1-8 | sed "s/^/$p $t: /"; done; done[27m[A[A[A[A[A[Cmake
+[K
+[K
+[K
+[K
+[K[A[A[A[A[A[C[C[C[C[C
+./vm addresses.txt lru fifo > saida.txt
+diff saida.txt esperado_linhas.txt && echo "IGUAL AO DO PROFESSOR" 
+for p in fifo lru; do for t in fifo lru; do ./vm addresses.txt $p $t | md5sum | cut -c1-8 | sed "s/^/$p $t: /"; done; done[A[A[A[A[K
+[K
+[K
+[K
+[K[A[A[A[A[A[C[C[C[C[C clean[K clean
+[?2004lrm -f vm 
+[?2004h]0;luisf@aluisio: /mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[01;32mluisf@aluisio[00m:[01;34m/mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[00m$ make clean[K
+[?2004lgcc -Wall -Wextra -std=c99 -O2 -o vm vm.c -pthread
+[?2004h]0;luisf@aluisio: /mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[01;32mluisf@aluisio[00m:[01;34m/mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[00m$ [7mmake[27m
+[7m./vm addresses.txt lru fifo > saida.txt[27m
+[7mdiff saida.txt esperado_linhas.txt && echo "IGUAL AO DO PROFES[27m[7mS[27m[7mOR" [27m
+[7mfor p in fifo lru; do for t in fifo lru; do ./vm addresses.txt[27m[7m [27m[7m$p $t | md5sum | cut -c1-8 | sed "s/^/$p $t: /"; done; done[27m[A[A[A[A[A[Cmake
+./vm addresses.txt lru fifo > saida.txt
+diff saida.txt esperado_linhas.txt && echo "IGUAL AO DO PROFESSOR"
+for p in fifo lru; do for t in fifo lru; do ./vm addresses.txt $p $t | md5sum | cut -c1-8 | sed "s/^/$p $t: /"; done; done
+[?2004lmake: Nothing to be done for 'all'.
+IGUAL AO DO PROFESSOR
+fifo fifo: a1226b2b
+fifo lru: 056eafe3
+lru fifo: c8f8894f
+lru lru: a5e79e7e
+[?2004h]0;luisf@aluisio: /mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[01;32mluisf@aluisio[00m:[01;34m/mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[00m$ [7mgit add vm.c evidencias.log[27m
+[7mgit commit -m "fix: preenche primeiro a posição livre da TLB a[27m[7mn[27m[7mtes de substituir" [27m
+[7mgit push[27m[A[A[A[Cgit add vm.c evidencias.log
+git commit -m "fix: preenche primeiro a posição livre da TLB antes de substituir"
+git push
+[?2004l[main 3cae5d2] fix: preenche primeiro a posição livre da TLB antes de substituir
+ 2 files changed, 81 insertions(+), 18 deletions(-)
+Username for 'https://github.com': LuisFilipe192
+Password for 'https://LuisFilipe192@github.com': 
+remote: Invalid username or token. Password authentication is not supported for Git operations.
+fatal: Authentication failed for 'https://github.com/LuisFilipe192/Mem-ria-Virtual.git/'
+[?2004h]0;luisf@aluisio: /mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[01;32mluisf@aluisio[00m:[01;34m/mnt/c/Users/luisf/Dow

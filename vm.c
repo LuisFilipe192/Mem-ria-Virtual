@@ -201,7 +201,7 @@ static void load_page(int page, int frame){
 static int tlb_page[TLB_SIZE];
 static int tlb_frame[TLB_SIZE];
 static int tlb_last_used[TLB_SIZE];
-static int tlb_fifo_next = 0;
+static int tlb_loaded_at[TLB_SIZE];
 
 typedef struct{
     int index;
@@ -251,25 +251,26 @@ static int tlb_lookup(int page){
     return -1;
 }
 
-static int tlb_insert(int page, int frame){
-    int index;
+static int tlb_insert(int page,int frame){
+    int index = -1;
 
-    if(tlb_alg == ALG_FIFO){
-        index = tlb_fifo_next;
-        tlb_fifo_next = (tlb_fifo_next + 1) % TLB_SIZE;
-    }
-    else{
-        index = -1;
-        for(int i = 0; i < TLB_SIZE; i++){
-            if(tlb_page[i] == -1){
-                index = i;
-                break;
-            }
+    for(int i=0;i<TLB_SIZE;i++){
+        if(tlb_page[i] ==-1){
+            index = i;
+            break;
         }
-        if(index == -1){
-            index = 0;
-            for(int i = 1; i < TLB_SIZE; i++){
-                if(tlb_last_used[i] < tlb_last_used[index]){
+    }
+
+    if(index == -1){
+        index = 0;
+        for(int i=1;i<TLB_SIZE;i++){
+            if(tlb_alg == ALG_FIFO){
+                if(tlb_loaded_at[i] < tlb_loaded_at[index]){
+                    index = i;
+                }
+            }
+            else{
+                if(tlb_last_used[i] <tlb_last_used[index]){
                     index = i;
                 }
             }
@@ -278,6 +279,7 @@ static int tlb_insert(int page, int frame){
 
     tlb_page[index] = page;
     tlb_frame[index] = frame;
+    tlb_loaded_at[index] = time_counter;
     tlb_last_used[index] = time_counter;
     return index;
 }
