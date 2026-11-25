@@ -8,6 +8,6 @@ vm: vm.c
 	$(CC) $(CFLAGS) -o vm vm.c -pthread
 
 clean:
-	rm -f vm 
+	rm -f vm correct.txt
 
 .PHONY: all clean

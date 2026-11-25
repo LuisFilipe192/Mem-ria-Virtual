@@ -14,6 +14,7 @@
 #define ALG_LRU 1
 
 #define BACKING_STORE "BACKING_STORE.bin"
+#define OUTPUT_FILE "correct.txt"
 
 #define LINE_MAX_LEN 256
 
@@ -180,6 +181,8 @@ static int next_frame = 0;
 static int fifo_next = 0;
 static int frame_last_used[NUM_FRAMES];
 static int time_counter = 0;
+static int page_faults = 0;
+static int tlb_hits = 0;
 
 static void init_page_table(void){
     for(int i=0;i < NUM_PAGES;i++){
@@ -201,7 +204,7 @@ static void load_page(int page, int frame){
 static int tlb_page[TLB_SIZE];
 static int tlb_frame[TLB_SIZE];
 static int tlb_last_used[TLB_SIZE];
-static int tlb_loaded_at[TLB_SIZE];
+static int tlb_fifo_next = 0;
 
 typedef struct{
     int index;
@@ -251,26 +254,25 @@ static int tlb_lookup(int page){
     return -1;
 }
 
-static int tlb_insert(int page,int frame){
-    int index = -1;
+static int tlb_insert(int page, int frame){
+    int index;
 
-    for(int i=0;i<TLB_SIZE;i++){
-        if(tlb_page[i] ==-1){
-            index = i;
-            break;
-        }
+    if(tlb_alg == ALG_FIFO){
+        index = tlb_fifo_next;
+        tlb_fifo_next = (tlb_fifo_next + 1) % TLB_SIZE;
     }
-
-    if(index == -1){
-        index = 0;
-        for(int i=1;i<TLB_SIZE;i++){
-            if(tlb_alg == ALG_FIFO){
-                if(tlb_loaded_at[i] < tlb_loaded_at[index]){
-                    index = i;
-                }
+    else{
+        index = -1;
+        for(int i = 0; i < TLB_SIZE; i++){
+            if(tlb_page[i] == -1){
+                index = i;
+                break;
             }
-            else{
-                if(tlb_last_used[i] <tlb_last_used[index]){
+        }
+        if(index == -1){
+            index = 0;
+            for(int i = 1; i < TLB_SIZE; i++){
+                if(tlb_last_used[i] < tlb_last_used[index]){
                     index = i;
                 }
             }
@@ -279,7 +281,6 @@ static int tlb_insert(int page,int frame){
 
     tlb_page[index] = page;
     tlb_frame[index] = frame;
-    tlb_loaded_at[index] = time_counter;
     tlb_last_used[index] = time_counter;
     return index;
 }
@@ -314,6 +315,7 @@ static int get_frame(int page){
         return page_table[page];
     }
 
+    page_faults++;
     int frame;
 
     if(next_frame < NUM_FRAMES){
@@ -333,7 +335,12 @@ static int get_frame(int page){
 }
 
 static void run(void){
-    for(int i = 0; i < n_addresses; i++){
+    FILE *out = fopen(OUTPUT_FILE, "w");
+    if(out == NULL){
+        die("could not create " OUTPUT_FILE);
+    }
+
+    for(int i=0;i<n_addresses;i++){
         int virtual_address = addresses[i];
         int page = (virtual_address >> 8) & 0xFF;
         int offset = virtual_address & 0xFF;
@@ -343,6 +350,7 @@ static void run(void){
         int tlb_index = tlb_lookup(page);
 
         if(tlb_index != -1){
+            tlb_hits++;
             frame = tlb_frame[tlb_index];
             tlb_last_used[tlb_index] = time_counter;
         }
@@ -355,9 +363,16 @@ static void run(void){
         int physical_address = frame * FRAME_SIZE + offset;
         int value = memory[frame][offset];
 
-        printf("Virtual address: %d TLB: %d Physical address: %d Value: %d\n",
+        fprintf(out, "Virtual address: %d TLB: %d Physical address: %d Value: %d\n",
             virtual_address, tlb_index, physical_address, value);
     }
+
+    fprintf(out, "Number of Translated Addresses = %d\n", n_addresses);
+    fprintf(out, "Page Faults = %d\n", page_faults);
+    fprintf(out, "Page Fault Rate = %.3f\n", (double)page_faults / n_addresses);
+    fprintf(out, "TLB Hits = %d\n", tlb_hits);
+    fprintf(out, "TLB Hit Rate = %.3f\n", (double)tlb_hits / n_addresses);
+    fclose(out);
 }
 
 int main(int argc, char *argv[]){

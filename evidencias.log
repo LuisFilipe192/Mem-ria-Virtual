@@ -2280,4 +2280,29 @@ Username for 'https://github.com': LuisFilipe192
 Password for 'https://LuisFilipe192@github.com': 
 remote: Invalid username or token. Password authentication is not supported for Git operations.
 fatal: Authentication failed for 'https://github.com/LuisFilipe192/Mem-ria-Virtual.git/'
-[?2004h]0;luisf@aluisio: /mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[01;32mluisf@aluisio[00m:[01;34m/mnt/c/Users/luisf/Dow
+[?2004h]0;luisf@aluisio: /mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[01;32mluisf@aluisio[00m:[01;34m/mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[00m$ [7mgit add vm.c evidencias.log[27m
+[7mgit commit -m "fix: preenche primeiro a posição livre da TLB a[27m[7mn[27m[7mtes de substituir"[27m[A[A[Cgit add vm.c evidencias.log
+git commit -m "fix: preenche primeiro a posição livre da TLB antes de substituir"
+[?2004l[main ab365c1] fix: preenche primeiro a posição livre da TLB antes de substituir
+ 1 file changed, 12 insertions(+), 1 deletion(-)
+[?2004h]0;luisf@aluisio: /mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[01;32mluisf@aluisio[00m:[01;34m/mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[00m$ [7mgit reset --soft HEAD~1[27m
+[7mgit commit --amend --no-edit[27m
+[7mgit log --oneline | head -3[27m[A[A[Cgit reset --soft HEAD~1
+git commit --amend --no-edit
+git log --oneline | head -3
+[?2004l[main 4abe36d] fix: preenche primeiro a posição livre da TLB antes de substituir
+ Date: Tue Nov 24 17:52:18 2026 -0300
+ 2 files changed, 87 insertions(+), 18 deletions(-)
+4abe36d fix: preenche primeiro a posição livre da TLB antes de substituir
+fdfeb90 feat: imprime a saída na saída padrão sem as estatísticas
+c986c72 Add files via upload
+[?2004h]0;luisf@aluisio: /mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[01;32mluisf@aluisio[00m:[01;34m/mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[00m$ [7mmake[27m
+[7m./vm addresses.txt lru fifo; echo $?[27m
+[7mdiff correct.txt esperado.txt && echo "IGUAL AO DO PROFESSOR"[27m[A[A[Cmake
+./vm addresses.txt lru fifo; echo $?
+diff correct.txt esperado.txt && echo "IGUAL AO DO PROFESSOR"
+[?2004lgcc -Wall -Wextra -std=c99 -O2 -o vm vm.c -pthread
+0
+IGUAL AO DO PROFESSOR
+[?2004h]0;luisf@aluisio: /mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[01;32mluisf@aluisio[00m:[01;34m/mnt/c/Users/luisf/Downloads/VM/Mem-ria-Virtual[00m$ [7mgit add vm.c Makefile evidencias.log[27m
+[7mgit commit -m "revert: volta a saída para o correct.txt confor[27m[7mm[27m[7me o enunciado original"[27m[A[A[Cgit add vm.c Makefile evi
